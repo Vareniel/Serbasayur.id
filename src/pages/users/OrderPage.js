@@ -167,7 +167,7 @@ const OrderPage = {
         alert("Berhasil menambahkan ke pesanan!");
         setTimeout(() => {
           window.location.href = "/checkout";
-        }, 5000); // Tunda selama 1 detik (1000 milidetik)
+        }, 20000); // Tunda selama 1 detik (1000 milidetik)
       } catch (error) {
         console.error("Error adding all product to order:", error.message);
         alert("Gagal menambahkan ke pesanan. Silakan coba lagi.");
