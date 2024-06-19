@@ -1,9 +1,10 @@
+// Import semua yang diperlukan
 import NavbarCheckout from "../../components/users/NavbarCheckout";
 import Address from "../../components/users/Address";
 import Shipment from "../../components/users/Shipment";
 import Payment from "../../components/users/Payment";
 import Footer from "../../components/users/Footer";
-import { getAllOrders, getAllOrderItems } from "../../services/api/order";
+import { getAllOrderItems } from "../../services/api/order";
 import { getProductById } from "../../services/api/product";
 import { addPayment } from "../../services/api/payment";
 
@@ -66,9 +67,17 @@ const CheckoutPage = {
           : total + harga * quantity;
       }, 0);
 
-      console.log(allCartItemsData);
-
       total = totalHarga + 25000; // Update nilai total
+
+      // Menggunakan setTimeout untuk memberi batas waktu 30 detik untuk render
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error("Render timeout"));
+        }, 30000); // Timeout set to 30 seconds
+      });
+
+      // Menunggu render selesai atau timeout
+      await Promise.race([timeoutPromise, NavbarCheckout.render()]);
 
       return `
         ${await NavbarCheckout.render()}
